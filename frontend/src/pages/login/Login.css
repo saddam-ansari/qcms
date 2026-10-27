@@ -1,0 +1,137 @@
+.login-container,
+.register-container {
+    position: relative;
+    width: min(440px, calc(100% - 32px));
+    margin: clamp(32px, 8vh, 78px) auto;
+    padding: 38px 40px;
+    overflow: hidden;
+    border: 1px solid rgba(226, 234, 246, .9);
+    border-radius: 22px;
+    background: rgba(255, 255, 255, .96);
+    box-shadow: 0 22px 65px rgba(31, 57, 97, .12);
+    animation: auth-card-enter .45s cubic-bezier(.2, .8, .2, 1) both;
+}
+
+.login-container::before,
+.register-container::before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 5px;
+    background: linear-gradient(90deg, #274c86, #5c91ec, #8cb4f5);
+    content: "";
+}
+
+.login-container h2,
+.register-container h2 {
+    margin: 0;
+    color: #1d2c44;
+    font-size: 27px;
+    letter-spacing: -.04em;
+    text-align: left;
+}
+
+.login-container > p:first-of-type,
+.register-container > p:first-of-type {
+    margin: 8px 0 25px;
+    color: #7a8799;
+    font-size: 13px;
+    line-height: 1.55;
+}
+
+.login-container form,
+.register-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.login-container label,
+.register-container label {
+    margin-top: 9px;
+    color: #46556c;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.login-container input,
+.register-container input,
+.register-container select {
+    min-height: 46px;
+    margin-top: 0;
+    padding: 11px 13px;
+    border: 1px solid #dfe6f0;
+    border-radius: 10px;
+    color: #25334b;
+    background: #fbfcfe;
+    transition: border-color .16s ease, box-shadow .16s ease, background .16s ease;
+}
+
+.login-container input:focus,
+.register-container input:focus,
+.register-container select:focus {
+    border-color: #7fa4e9;
+    outline: none;
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(86, 136, 229, .11);
+}
+
+.login-container form button,
+.register-container form button {
+    min-height: 47px;
+    margin-top: 18px;
+    padding: 0 16px;
+    border: 0;
+    border-radius: 10px;
+    color: #fff;
+    background: linear-gradient(110deg, #294f8c, #3976d5);
+    box-shadow: 0 8px 18px rgba(49, 95, 174, .2);
+    font-size: 14px;
+    font-weight: 750;
+    cursor: pointer;
+    transition: box-shadow .18s ease, transform .18s ease;
+}
+
+.login-container form button:hover,
+.register-container form button:hover {
+    box-shadow: 0 12px 23px rgba(49, 95, 174, .27);
+    transform: translateY(-1px);
+}
+
+.login-container > p:last-child,
+.register-container > p:last-child {
+    margin: 23px 0 0;
+    color: #77859a;
+    font-size: 13px;
+    text-align: center;
+}
+
+.login-container > p:last-child a {
+    margin-left: 5px;
+    color: #315fae;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.login-container > p:last-child a:hover {
+    text-decoration: underline;
+}
+
+@keyframes auth-card-enter {
+    from {
+        opacity: 0;
+        transform: translateY(12px) scale(.99);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@media (max-width: 480px) {
+    .login-container,
+    .register-container {
+        padding: 32px 25px;
+    }
+}
