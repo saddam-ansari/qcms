@@ -1,9 +1,11 @@
+
 import axios from "axios";
 
-
-// Create axios instance
+// Use the deployed backend in production and localhost during development.
 const api = axios.create({
-    baseURL: "http://localhost:4000/api"
+    baseURL: process.env.NODE_ENV === "production"
+        ? "https://qcms-yvks.onrender.com/api"
+        : "http://localhost:4000/api"
 });
 
 // Add token automatically
@@ -30,6 +32,5 @@ api.interceptors.response.use(
         return Promise.reject(error);
     }
 );
-
 
 export default api;
