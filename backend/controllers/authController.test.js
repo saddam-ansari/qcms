@@ -12,7 +12,11 @@ const { createUser, findUserByEmail } = require("../models/userModel");
 const { register } = require("./authController");
 
 describe("register", () => {
-    test("assigns the least-privileged role and never returns the password hash", async () => {
+    beforeEach(() => {
+        jest.clearAllMocks();
+    });
+
+    test("registers Inspector by default and never returns the password hash", async () => {
         findUserByEmail.mockResolvedValue(null);
         bcrypt.hash.mockResolvedValue("hashed-password");
         createUser.mockResolvedValue({
@@ -32,8 +36,7 @@ describe("register", () => {
             body: {
                 name: "Test User",
                 email: "test@example.com",
-                password: "password",
-                role: "Manager"
+                password: "password"
             }
         }, response);
 
@@ -53,5 +56,57 @@ describe("register", () => {
                 role: "Inspector"
             }
         });
+    });
+
+    test("registers Manager when selected", async () => {
+        findUserByEmail.mockResolvedValue(null);
+        bcrypt.hash.mockResolvedValue("hashed-password");
+        createUser.mockResolvedValue({
+            id: 6,
+            name: "Manager User",
+            email: "manager@example.com",
+            role: "Manager"
+        });
+        const response = {
+            status: jest.fn().mockReturnThis(),
+            json: jest.fn()
+        };
+
+        await register({
+            body: {
+                name: "Manager User",
+                email: "manager@example.com",
+                password: "password",
+                role: "Manager"
+            }
+        }, response);
+
+        expect(createUser).toHaveBeenCalledWith(
+            "Manager User",
+            "manager@example.com",
+            "hashed-password",
+            "Manager"
+        );
+        expect(response.status).toHaveBeenCalledWith(201);
+    });
+
+    test("rejects unsupported account roles", async () => {
+        const response = {
+            status: jest.fn().mockReturnThis(),
+            json: jest.fn()
+        };
+
+        await register({
+            body: {
+                name: "Manager User",
+                email: "manager@example.com",
+                password: "password",
+                role: "Administrator"
+            }
+        }, response);
+
+        expect(response.status).toHaveBeenCalledWith(400);
+        expect(createUser).not.toHaveBeenCalled();
+        expect(findUserByEmail).not.toHaveBeenCalled();
     });
 });

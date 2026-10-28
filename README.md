@@ -16,6 +16,8 @@ QCMS is a role-based quality control management system designed for organization
 - **Protected Routes**: Secure navigation with token verification
 - **Responsive UI**: Clean and intuitive user interface
 
+The registration form lets users select either Inspector or Manager. This is intentionally open for this learning/demo project so reviewers can try both roles. Do not enable public Manager self-registration on a production deployment; restrict Manager account creation to an administrator-controlled flow.
+
 ## 🛠️ Tech Stack
 
 ### Frontend

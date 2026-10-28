@@ -10,7 +10,8 @@ function Register() {
     const [formData, setFormData] = useState({
         name: "",
         email: "",
-        password: ""
+        password: "",
+        role: "Inspector"
     });
 
     // Store message
@@ -75,6 +76,16 @@ function Register() {
                     onChange={handleChange}
                     required
                 />
+                <label htmlFor="registration-role">Account role</label>
+                <select
+                    id="registration-role"
+                    name="role"
+                    value={formData.role}
+                    onChange={handleChange}
+                >
+                    <option value="Inspector">Inspector</option>
+                    <option value="Manager">Manager</option>
+                </select>
                 <button type="submit">Register</button>
             </form>
             <p>{message}</p>

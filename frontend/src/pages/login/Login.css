@@ -68,6 +68,13 @@
     transition: border-color .16s ease, box-shadow .16s ease, background .16s ease;
 }
 
+.registration-role-note {
+    margin-top: -3px;
+    color: #78869a;
+    font-size: 11px;
+    line-height: 1.5;
+}
+
 .login-container input:focus,
 .register-container input:focus,
 .register-container select:focus {
